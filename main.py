@@ -8,6 +8,7 @@ sts = sts_module()
 cr = c_data()
 config = dotenv_values(".env")
 notion_secret = config.get('NOTION_TOKEN')
+notion_page_id = config.get('PAGE_ID')
 
 content_list=cr.run_code()
 contents=sts.sts_func(content_list)
@@ -23,7 +24,7 @@ for title,link in contents:
     # retrieved_page = notion.pages.retrieve(page_id='')
     # pprint(retrieved_page['properties'])
 
-    page_sample = notion.pages.retrieve(page_id='534f4768-579e-43bf-8772-e5faa4726e28')
+    page_sample = notion.pages.retrieve(page_id=notion_page_id)
     properties_new = page_sample['properties']
     # pprint(properties_new)
     properties_new['날짜']['date']['start'] = datetime.now().strftime("%Y-%m-%d")
